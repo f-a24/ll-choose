@@ -61,15 +61,12 @@ export default function App() {
         color="inherit"
         elevation={0}
       >
-        <Toolbar sx={{ maxWidth: 900, width: '100%', mx: 'auto' }}>          
-    <img
-      src="/logo.svg"
-      alt="LoveLive! Choose"
-      style={{
+        <Toolbar sx={{ maxWidth: 900, width: '100%', mx: 'auto' }}>
+          <img src="./logo.svg" alt="LoveLive! Choose" style={{
         height: '64px',
         width: 'auto',
       }}
-    />
+      />
         </Toolbar>
       </AppBar>
 
