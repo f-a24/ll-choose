@@ -56,7 +56,7 @@ export default function App() {
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <AppBar position="static" color="inherit" elevation={0}>
+      <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar sx={{ maxWidth: 900, width: '100%', mx: 'auto' }}>
           <img
             src="./logo.svg"
