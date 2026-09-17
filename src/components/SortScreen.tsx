@@ -1,17 +1,26 @@
-import { ButtonBase, Box, Button, Chip, LinearProgress, Paper, Stack, Typography } from '@suid/material'
-import HandshakeIcon from '@suid/icons-material/Handshake'
-import TuneIcon from '@suid/icons-material/Tune'
-import { withBreakHints } from '../lib/text'
-import type { Answer } from '../lib/sorter'
-import type { SortItem } from '../types'
+import {
+  ButtonBase,
+  Box,
+  Button,
+  Chip,
+  LinearProgress,
+  Paper,
+  Stack,
+  Typography,
+} from '@suid/material';
+import HandshakeIcon from '@suid/icons-material/Handshake';
+import TuneIcon from '@suid/icons-material/Tune';
+import { withBreakHints } from '../lib/text';
+import type { Answer } from '../lib/sorter';
+import type { SortItem } from '../types';
 
 interface Props {
-  left: SortItem
-  right: SortItem
-  comparisons: number
-  progress: number
-  onAnswer: (a: Answer) => void
-  onBackToSetup: () => void
+  left: SortItem;
+  right: SortItem;
+  comparisons: number;
+  progress: number;
+  onAnswer: (a: Answer) => void;
+  onBackToSetup: () => void;
 }
 
 function Card(props: { item: SortItem; onClick: () => void }) {
@@ -90,7 +99,7 @@ function Card(props: { item: SortItem; onClick: () => void }) {
         </Typography>
       </Paper>
     </ButtonBase>
-  )
+  );
 }
 
 export default function SortScreen(props: Props) {
@@ -117,19 +126,35 @@ export default function SortScreen(props: Props) {
       </Typography>
 
       {/* SUID の Stack の spacing はレスポンシブ指定が効かないため gap を使う */}
-      <Stack direction="row" alignItems="stretch" sx={{ gap: { xs: 2, sm: 3 } }}>
+      <Stack
+        direction="row"
+        alignItems="stretch"
+        sx={{ gap: { xs: 2, sm: 3 } }}
+      >
         <Card item={props.left} onClick={() => props.onAnswer('left')} />
         <Card item={props.right} onClick={() => props.onAnswer('right')} />
       </Stack>
 
-      <Stack direction="row" justifyContent="center" sx={{ flexWrap: 'wrap', gap: 1 }}>
-        <Button variant="outlined" startIcon={<HandshakeIcon />} onClick={() => props.onAnswer('tie')}>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        sx={{ flexWrap: 'wrap', gap: 1 }}
+      >
+        <Button
+          variant="outlined"
+          startIcon={<HandshakeIcon />}
+          onClick={() => props.onAnswer('tie')}
+        >
           引き分け
         </Button>
-        <Button color="inherit" startIcon={<TuneIcon />} onClick={props.onBackToSetup}>
+        <Button
+          color="inherit"
+          startIcon={<TuneIcon />}
+          onClick={props.onBackToSetup}
+        >
           対象を選び直す
         </Button>
       </Stack>
     </Stack>
-  )
+  );
 }

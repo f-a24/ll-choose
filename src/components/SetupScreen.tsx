@@ -1,4 +1,4 @@
-import { createMemo, createSignal, For, Show } from 'solid-js'
+import { createMemo, createSignal, For, Show } from 'solid-js';
 import {
   Box,
   Button,
@@ -10,67 +10,68 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   Typography,
-} from '@suid/material'
-import ExpandMoreIcon from '@suid/icons-material/ExpandMore'
-import PlayArrowIcon from '@suid/icons-material/PlayArrow'
-import { memberKey } from '../lib/items'
-import { maxComparisons } from '../lib/sorter'
-import { withBreakHints } from '../lib/text'
-import type { CharacterData, SortMode } from '../types'
+} from '@suid/material';
+import ExpandMoreIcon from '@suid/icons-material/ExpandMore';
+import PlayArrowIcon from '@suid/icons-material/PlayArrow';
+import { memberKey } from '../lib/items';
+import { maxComparisons } from '../lib/sorter';
+import { withBreakHints } from '../lib/text';
+import type { CharacterData, SortMode } from '../types';
 
 interface Props {
-  data: CharacterData
-  mode: SortMode
-  onModeChange: (mode: SortMode) => void
-  selected: Set<string>
-  onSelectedChange: (next: Set<string>) => void
-  itemCount: number
-  onStart: () => void
+  data: CharacterData;
+  mode: SortMode;
+  onModeChange: (mode: SortMode) => void;
+  selected: Set<string>;
+  onSelectedChange: (next: Set<string>) => void;
+  itemCount: number;
+  onStart: () => void;
 }
 
 export default function SetupScreen(props: Props) {
-  const groups = createMemo(() => Object.entries(props.data))
+  const groups = createMemo(() => Object.entries(props.data));
   /** 開いているグループ名 (SUID に Accordion がないため自前で開閉する) */
-  const [expanded, setExpanded] = createSignal<Set<string>>(new Set())
+  const [expanded, setExpanded] = createSignal<Set<string>>(new Set());
 
   const toggleExpanded = (group: string) => {
-    const next = new Set(expanded())
-    if (next.has(group)) next.delete(group)
-    else next.add(group)
-    setExpanded(next)
-  }
+    const next = new Set(expanded());
+    if (next.has(group)) next.delete(group);
+    else next.add(group);
+    setExpanded(next);
+  };
 
   const toggleMember = (key: string) => {
-    const next = new Set(props.selected)
-    if (next.has(key)) next.delete(key)
-    else next.add(key)
-    props.onSelectedChange(next)
-  }
+    const next = new Set(props.selected);
+    if (next.has(key)) next.delete(key);
+    else next.add(key);
+    props.onSelectedChange(next);
+  };
 
   const toggleGroup = (group: string, checked: boolean) => {
-    const next = new Set(props.selected)
+    const next = new Set(props.selected);
     for (const m of props.data[group]) {
-      const key = memberKey(group, m.char)
-      if (checked) next.add(key)
-      else next.delete(key)
+      const key = memberKey(group, m.char);
+      if (checked) next.add(key);
+      else next.delete(key);
     }
-    props.onSelectedChange(next)
-  }
+    props.onSelectedChange(next);
+  };
 
   const setAll = (checked: boolean) => {
     if (!checked) {
-      props.onSelectedChange(new Set())
-      return
+      props.onSelectedChange(new Set());
+      return;
     }
-    const next = new Set<string>()
+    const next = new Set<string>();
     for (const [group, members] of groups()) {
-      for (const m of members) next.add(memberKey(group, m.char))
+      for (const m of members) next.add(memberKey(group, m.char));
     }
-    props.onSelectedChange(next)
-  }
+    props.onSelectedChange(next);
+  };
 
   const countIn = (group: string) =>
-    props.data[group].filter((m) => props.selected.has(memberKey(group, m.char))).length
+    props.data[group].filter(m => props.selected.has(memberKey(group, m.char)))
+      .length;
 
   return (
     <Stack spacing={2.5} sx={{ pb: 12 }}>
@@ -84,19 +85,30 @@ export default function SetupScreen(props: Props) {
           color="primary"
           value={props.mode}
           onChange={(_, v) => {
-            if (v) props.onModeChange(v as SortMode)
+            if (v) props.onModeChange(v as SortMode);
           }}
         >
           <ToggleButton value="char">キャラクター</ToggleButton>
           <ToggleButton value="cast">キャスト</ToggleButton>
         </ToggleButtonGroup>
-        <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
-          {props.mode === 'char' ? 'キャラクター名で比較します。' : 'キャスト名で比較します。'}
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ mt: 1, display: 'block' }}
+        >
+          {props.mode === 'char'
+            ? 'キャラクター名で比較します。'
+            : 'キャスト名で比較します。'}
         </Typography>
       </Paper>
 
       <Paper variant="outlined" sx={{ p: { xs: 1.5, sm: 2.5 } }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ mb: 1.5 }}
+        >
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             対象メンバー
           </Typography>
@@ -112,8 +124,8 @@ export default function SetupScreen(props: Props) {
 
         <For each={groups()}>
           {([group, members]) => {
-            const count = createMemo(() => countIn(group))
-            const isOpen = createMemo(() => expanded().has(group))
+            const count = createMemo(() => countIn(group));
+            const isOpen = createMemo(() => expanded().has(group));
             return (
               <Box sx={{ borderTop: 1, borderColor: 'divider' }}>
                 <Stack direction="row" alignItems="center">
@@ -134,7 +146,12 @@ export default function SetupScreen(props: Props) {
                       borderRadius: 2,
                     }}
                   >
-                    <Stack direction="row" alignItems="center" spacing={1} sx={{ minWidth: 0 }}>
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      spacing={1}
+                      sx={{ minWidth: 0 }}
+                    >
                       <Typography
                         sx={{
                           fontWeight: 700,
@@ -167,24 +184,47 @@ export default function SetupScreen(props: Props) {
                   <Box
                     sx={{
                       display: 'grid',
-                      gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr' },
+                      gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: '1fr 1fr',
+                        md: '1fr 1fr 1fr',
+                      },
                       pb: 1.5,
                     }}
                   >
                     <For each={members}>
-                      {(m) => (
+                      {m => (
                         // label で包むと名前をクリックしてもチェックが切り替わる
-                        <label style={{ display: 'flex', 'align-items': 'center', cursor: 'pointer' }}>
+                        <label
+                          style={{
+                            display: 'flex',
+                            'align-items': 'center',
+                            cursor: 'pointer',
+                          }}
+                        >
                           <Checkbox
-                            checked={props.selected.has(memberKey(group, m.char))}
-                            onChange={() => toggleMember(memberKey(group, m.char))}
-                            sx={{ color: m.color, '&.Mui-checked': { color: m.color } }}
+                            checked={props.selected.has(
+                              memberKey(group, m.char),
+                            )}
+                            onChange={() =>
+                              toggleMember(memberKey(group, m.char))
+                            }
+                            sx={{
+                              color: m.color,
+                              '&.Mui-checked': { color: m.color },
+                            }}
                           />
                           <Stack>
-                            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                            <Typography
+                              variant="body2"
+                              sx={{ fontWeight: 600 }}
+                            >
                               {props.mode === 'char' ? m.char : m.cast}
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography
+                              variant="caption"
+                              color="text.secondary"
+                            >
                               {props.mode === 'char' ? m.cast : m.char}
                             </Typography>
                           </Stack>
@@ -194,12 +234,16 @@ export default function SetupScreen(props: Props) {
                   </Box>
                 </Show>
               </Box>
-            )
+            );
           }}
         </For>
       </Paper>
 
-      <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ display: 'block' }}
+      >
         ※ 非公式のファンメイドツールです。
       </Typography>
 
@@ -244,5 +288,5 @@ export default function SetupScreen(props: Props) {
         </Stack>
       </Paper>
     </Stack>
-  )
+  );
 }

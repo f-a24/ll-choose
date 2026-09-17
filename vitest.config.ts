@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config'
-import solid from 'vite-plugin-solid'
+import { defineConfig } from 'vitest/config';
+import solid from 'vite-plugin-solid';
 
 // solid-js の開発用ビルドを読ませる必要があるため、本番ビルド設定とは分けている
 export default defineConfig({
@@ -14,4 +14,4 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
   },
-})
+});

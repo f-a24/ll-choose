@@ -1,4 +1,4 @@
-import { createTheme } from '@suid/material/styles'
+import { createTheme } from '@suid/material/styles';
 
 export const theme = createTheme({
   palette: {
@@ -16,4 +16,4 @@ export const theme = createTheme({
     ].join(','),
   },
   shape: { borderRadius: 14 },
-})
+});

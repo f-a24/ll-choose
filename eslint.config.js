@@ -1,7 +1,7 @@
-import js from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import solid from 'eslint-plugin-solid/configs/typescript'
-import globals from 'globals'
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import solid from 'eslint-plugin-solid/configs/typescript';
+import globals from 'globals';
 
 export default tseslint.config(
   { ignores: ['dist', 'node_modules', 'coverage'] },
@@ -38,4 +38,4 @@ export default tseslint.config(
       globals: globals.node,
     },
   },
-)
+);
