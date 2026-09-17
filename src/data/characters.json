@@ -1,0 +1,76 @@
+{
+  "μ's": [
+    { "char": "高坂穂乃果", "cast": "新田恵海", "color": "#FF7F27" },
+    { "char": "絢瀬絵里", "cast": "南條愛乃", "color": "#53B4DC" },
+    { "char": "南ことり", "cast": "内田彩", "color": "#B0B0B0" },
+    { "char": "園田海未", "cast": "三森すずこ", "color": "#1F6BC6" },
+    { "char": "星空凛", "cast": "飯田里穂", "color": "#FFE14D" },
+    { "char": "西木野真姫", "cast": "Pile", "color": "#E4002B" },
+    { "char": "東條希", "cast": "楠田亜衣奈", "color": "#9B4FA0" },
+    { "char": "小泉花陽", "cast": "久保ユリカ", "color": "#8FD32E" },
+    { "char": "矢澤にこ", "cast": "徳井青空", "color": "#FF6EA9" }
+  ],
+  "Aqours": [
+    { "char": "高海千歌", "cast": "伊波杏樹", "color": "#F39800" },
+    { "char": "桜内梨子", "cast": "逢田梨香子", "color": "#F8AEC4" },
+    { "char": "松浦果南", "cast": "諏訪ななか", "color": "#17B36D" },
+    { "char": "黒澤ダイヤ", "cast": "小宮有紗", "color": "#E6002D" },
+    { "char": "渡辺曜", "cast": "斉藤朱夏", "color": "#00A0E9" },
+    { "char": "津島善子", "cast": "小林愛香", "color": "#DAD8D2" },
+    { "char": "国木田花丸", "cast": "高槻かなこ", "color": "#FFD900" },
+    { "char": "小原鞠莉", "cast": "鈴木愛奈", "color": "#A06BC0" },
+    { "char": "黒澤ルビィ", "cast": "降幡愛", "color": "#FF9EC7" }
+  ],
+  "虹ヶ咲学園スクールアイドル同好会": [
+    { "char": "上原歩夢", "cast": "大西亜玖璃", "color": "#FF8DC3" },
+    { "char": "中須かすみ", "cast": "相良茉優", "color": "#FFE359" },
+    { "char": "桜坂しずく", "cast": "前田佳織里", "color": "#7FC7F0" },
+    { "char": "朝香果林", "cast": "久保田未夢", "color": "#2F52B0" },
+    { "char": "宮下愛", "cast": "村上奈津実", "color": "#FF9A3C" },
+    { "char": "近江彼方", "cast": "鬼頭明里", "color": "#9B7EC8" },
+    { "char": "優木せつ菜", "cast": "林鼓子", "color": "#E8383D" },
+    { "char": "エマ・ヴェルデ", "cast": "指出毬亜", "color": "#8FD98F" },
+    { "char": "天王寺璃奈", "cast": "田中ちえ美", "color": "#E2E0D8" },
+    { "char": "三船栞子", "cast": "小泉萌香", "color": "#2E9E7E" },
+    { "char": "ミア・テイラー", "cast": "内田秀", "color": "#C0C4CC" },
+    { "char": "鐘嵐珠", "cast": "法元明菜", "color": "#E0A899" }
+  ],
+  "Liella!": [
+    { "char": "澁谷かのん", "cast": "伊達さゆり", "color": "#FFB01F" },
+    { "char": "唐可可", "cast": "Liyuu", "color": "#8ED4F0" },
+    { "char": "嵐千砂都", "cast": "岬なこ", "color": "#FFAFA0" },
+    { "char": "平安名すみれ", "cast": "ペイトン尚未", "color": "#A8D96B" },
+    { "char": "葉月恋", "cast": "青山なぎさ", "color": "#2B5FCC" },
+    { "char": "桜小路きな子", "cast": "鈴原希実", "color": "#F7D046" },
+    { "char": "米女メイ", "cast": "薮島朱音", "color": "#D6304F" },
+    { "char": "ウィーン・マルガレーテ", "cast": "結那", "color": "#A57FD4" },
+    { "char": "鬼塚夏美", "cast": "絵森彩", "color": "#F2617F" },
+    { "char": "鬼塚冬毬", "cast": "坂倉花", "color": "#6E8FB5" },
+    { "char": "若菜四季", "cast": "大熊和奏", "color": "#CFEDE4" }
+  ],
+  "蓮ノ空女学院スクールアイドルクラブ": [
+    { "char": "日野下花帆", "cast": "楡井希実", "color": "#FBA51E" },
+    { "char": "村野さやか", "cast": "野中ここな", "color": "#5BA3E0" },
+    { "char": "乙宗梢", "cast": "花宮初奈", "color": "#3FB98B" },
+    { "char": "夕霧綴理", "cast": "佐々木琴子", "color": "#D0344A" },
+    { "char": "大沢瑠璃乃", "cast": "菅叶和", "color": "#F06CA8" },
+    { "char": "藤島慈", "cast": "月音こな", "color": "#EDE7DE" },
+    { "char": "百生吟子", "cast": "櫻井陽菜", "color": "#7FD6E8" },
+    { "char": "徒町小鈴", "cast": "葉山風花", "color": "#F6C445" },
+    { "char": "安養寺姫芽", "cast": "来栖りん", "color": "#C6A7E8" },
+    { "char": "セラス 柳田 リリエンフェルト", "cast": "三宅美羽", "color": "#E8453C" },
+    { "char": "桂城泉", "cast": "進藤あまね", "color": "#2E9E6B" }
+  ],
+  "いきづらい部！": [
+    { "char": "高橋ポルカ", "cast": "綾咲穂音", "color": "#FAE264" },
+    { "char": "麻布麻衣", "cast": "遠藤璃菜", "color": "#019FE0" },
+    { "char": "五桐玲", "cast": "宮野芹", "color": "#BDEFAC" },
+    { "char": "駒形花火", "cast": "藤野こころ", "color": "#FE211F" },
+    { "char": "金澤奇跡", "cast": "坂野愛羽", "color": "#FEB7F1" },
+    { "char": "調布のりこ", "cast": "瀬古梨愛", "color": "#CC96FF" },
+    { "char": "春宮ゆくり", "cast": "奥村優季", "color": "#B1F9FE" },
+    { "char": "此花輝夜", "cast": "天沢朱音", "color": "#FE589E" },
+    { "char": "山田真緑", "cast": "小戸森穂花", "color": "#18B300" },
+    { "char": "佐々木翔音", "cast": "涼ノ瀬葵音", "color": "#E8E8E8" }
+  ]
+}
