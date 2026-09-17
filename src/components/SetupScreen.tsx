@@ -2,9 +2,9 @@ import { createMemo, createSignal, For, Show } from 'solid-js';
 import {
   Box,
   Button,
-  ButtonBase,
   Checkbox,
   Chip,
+  IconButton,
   Paper,
   Stack,
   ToggleButton,
@@ -134,9 +134,9 @@ export default function SetupScreen(props: Props) {
                     indeterminate={count() > 0 && count() < members.length}
                     onChange={(_, checked) => toggleGroup(group, checked)}
                   />
-                  <ButtonBase
-                    onClick={() => toggleExpanded(group)}
+                  <Box
                     sx={{
+                      display: 'flex',
                       flex: 1,
                       minWidth: 0,
                       justifyContent: 'space-between',
@@ -170,14 +170,22 @@ export default function SetupScreen(props: Props) {
                         sx={{ flexShrink: 0, minWidth: 62 }}
                       />
                     </Stack>
-                    <ExpandMoreIcon
-                      sx={{
-                        color: 'action.active',
-                        transition: 'transform .2s',
-                        transform: isOpen() ? 'rotate(180deg)' : 'none',
-                      }}
-                    />
-                  </ButtonBase>
+                    <IconButton
+                      color="primary"
+                      aria-label={`${group} のメンバー一覧を開閉`}
+                      aria-expanded={isOpen()}
+                      sx={{ p: 0 }}
+                      onClick={() => toggleExpanded(group)}
+                    >
+                      <ExpandMoreIcon
+                        sx={{
+                          color: 'action.active',
+                          transition: 'transform .2s',
+                          transform: isOpen() ? 'rotate(180deg)' : 'none',
+                        }}
+                      />
+                    </IconButton>
+                  </Box>
                 </Stack>
 
                 <Show when={isOpen()}>

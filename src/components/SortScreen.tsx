@@ -33,9 +33,6 @@ function Card(props: { item: SortItem; onClick: () => void }) {
         minWidth: 0,
         borderRadius: 3,
         textAlign: 'left',
-        transition: 'transform .12s ease, box-shadow .12s ease',
-        '&:hover': { transform: 'translateY(-4px)' },
-        '&:active': { transform: 'translateY(0)' },
       }}
     >
       <Paper

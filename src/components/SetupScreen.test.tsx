@@ -42,6 +42,18 @@ const lastSelection = (fn: ReturnType<typeof vi.fn>) => [
   ...(fn.mock.calls.at(-1)![0] as Set<string>),
 ];
 
+/**
+ * グループ見出し右端の開閉ボタンを押す。
+ * 見出しテキスト自体はクリック対象ではないため、名前から行をたどってボタンを探す。
+ */
+function toggleGroup(group: string) {
+  let row: HTMLElement | null = screen.getByText(group);
+  while (row && !row.querySelector('[aria-expanded]')) row = row.parentElement;
+  const button = row?.querySelector('[aria-expanded]');
+  if (!button) throw new Error(`開閉ボタンが見つかりません: ${group}`);
+  fireEvent.click(button);
+}
+
 describe('SetupScreen', () => {
   it('選択中の人数と最大比較回数を表示する', () => {
     setup();
@@ -60,25 +72,34 @@ describe('SetupScreen', () => {
     expect(screen.queryByText('キャラA1')).toBeNull();
   });
 
-  it('グループ見出しを押すとメンバー一覧が開く', () => {
+  it('グループの開閉ボタンを押すとメンバー一覧が開く', () => {
     setup();
-    fireEvent.click(screen.getByText('グループA'));
+    toggleGroup('グループA');
     expect(screen.getByText('キャラA1')).toBeInTheDocument();
     expect(screen.getByText('キャラA2')).toBeInTheDocument();
     expect(screen.queryByText('キャラB1')).toBeNull();
   });
 
+  it('開閉ボタンはキーボード操作できる button で、開閉状態を aria-expanded で伝える', () => {
+    const { container } = setup();
+    const button = container.querySelector('[aria-expanded]') as HTMLElement;
+    expect(button.tagName).toBe('BUTTON');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+    toggleGroup('グループA');
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+  });
+
   it('複数のグループを同時に開ける', () => {
     setup();
-    fireEvent.click(screen.getByText('グループA'));
-    fireEvent.click(screen.getByText('グループB'));
+    toggleGroup('グループA');
+    toggleGroup('グループB');
     expect(screen.getByText('キャラA1')).toBeInTheDocument();
     expect(screen.getByText('キャラB1')).toBeInTheDocument();
   });
 
   it('キャストモードではキャスト名を主に表示する', () => {
     setup({ mode: 'cast' });
-    fireEvent.click(screen.getByText('グループA'));
+    toggleGroup('グループA');
     expect(screen.getByText('キャストA1')).toBeInTheDocument();
     expect(screen.getByText('キャラA1')).toBeInTheDocument();
   });
@@ -97,7 +118,7 @@ describe('SetupScreen', () => {
 
   it('メンバーのチェックを外すとそのキーだけが除かれる', () => {
     const { onSelectedChange } = setup();
-    fireEvent.click(screen.getByText('グループA'));
+    toggleGroup('グループA');
     fireEvent.click(screen.getByText('キャラA1'));
     expect(lastSelection(onSelectedChange)).toEqual([allKeys[1], allKeys[2]]);
   });
