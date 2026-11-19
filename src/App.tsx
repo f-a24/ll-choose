@@ -1,4 +1,4 @@
-import { createMemo, createSignal, Show } from 'solid-js';
+import { createEffect, createMemo, createSignal, Show } from 'solid-js';
 import { AppBar, Box, Container, Toolbar } from '@suid/material';
 import SetupScreen from './components/SetupScreen';
 import SortScreen from './components/SortScreen';
@@ -54,22 +54,36 @@ export default function App() {
     return s && !s.state.done ? currentPair(s.state) : null;
   });
 
+  // SPA なので画面が切り替わるたびにタブのタイトルも更新する
+  createEffect(() => {
+    const s = session();
+    const screen = !s
+      ? '対象を選ぶ'
+      : s.state.done
+        ? 'ランキング結果'
+        : 'どちらが好き？';
+    document.title = screen + ' | LoveLive! Choose';
+  });
+
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar sx={{ maxWidth: 900, width: '100%', mx: 'auto' }}>
-          <img
-            src="./logo.svg"
-            alt="LoveLive! Choose"
-            style={{
-              height: '64px',
-              width: 'auto',
-            }}
-          />
+          {/* ロゴがページの主見出し。LCP 候補なので優先して読み込み、サイズを指定してずれを防ぐ */}
+          <h1 style={{ margin: 0, 'line-height': 0 }}>
+            <img
+              src="./logo.svg"
+              alt="LoveLive! Choose"
+              width="177"
+              height="64"
+              fetchpriority="high"
+              style={{ height: '64px', width: 'auto' }}
+            />
+          </h1>
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="md" sx={{ pt: 2, pb: 3 }}>
+      <Container component="main" maxWidth="md" sx={{ pt: 2, pb: 3 }}>
         <Show when={!session()}>
           <SetupScreen
             data={data}

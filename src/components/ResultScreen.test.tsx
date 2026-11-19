@@ -71,9 +71,7 @@ const allGroupsChip = () =>
 
 /** グループ絞り込みのチップ (各行のグループバッジにも同名の文字があるため区別する) */
 const groupChip = (name: string) =>
-  screen
-    .getAllByText(name)
-    .find(el => el.className.includes('MuiChip-label'))!;
+  screen.getAllByText(name).find(el => el.className.includes('MuiChip-label'))!;
 
 describe('ResultScreen', () => {
   it('見出しに対象種別と件数を表示する', () => {

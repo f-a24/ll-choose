@@ -3,6 +3,7 @@ import { CssBaseline } from '@suid/material';
 import { ThemeProvider } from '@suid/material/styles';
 import App from './App';
 import { theme } from './theme';
+import './index.css';
 
 render(
   () => (

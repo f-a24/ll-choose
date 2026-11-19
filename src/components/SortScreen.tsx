@@ -1,16 +1,7 @@
-import {
-  ButtonBase,
-  Box,
-  Button,
-  Chip,
-  LinearProgress,
-  Paper,
-  Stack,
-  Typography,
-} from '@suid/material';
+import { ButtonBase, Box, Button, Stack, Typography } from '@suid/material';
 import HandshakeIcon from '@suid/icons-material/Handshake';
 import TuneIcon from '@suid/icons-material/Tune';
-import { borderColor, inkColor, onColor } from '../lib/color';
+import { borderColor, inkColor } from '../lib/color';
 import { withBreakHints } from '../lib/text';
 import type { Answer } from '../lib/sorter';
 import type { SortItem } from '../types';
@@ -25,9 +16,12 @@ interface Props {
 }
 
 function Card(props: { item: SortItem; onClick: () => void }) {
+  // ボタンの中に置けるのはフレーズコンテンツだけなので、内側の要素はすべて span にする
   return (
     <ButtonBase
+      class="choice-card"
       onClick={props.onClick}
+      style={{ '--item-color': props.item.color }}
       sx={{
         // 狭い端末でも 2 枚が左右に並ぶよう等幅で縮める
         flex: '1 1 0',
@@ -36,8 +30,9 @@ function Card(props: { item: SortItem; onClick: () => void }) {
         textAlign: 'left',
       }}
     >
-      <Paper
-        elevation={0}
+      {/* SUID の Paper は component 指定を無視して div になるため Box を使う */}
+      <Box
+        component="span"
         sx={{
           width: '100%',
           p: { xs: 1, sm: 4 },
@@ -53,31 +48,32 @@ function Card(props: { item: SortItem; onClick: () => void }) {
           gap: { xs: 0.75, sm: 1 },
         }}
       >
-        <Chip
-          size="small"
-          label={withBreakHints(props.item.group)}
+        {/* グループ名のバッジ。文字色は CSS の contrast-color() で背景色から決める */}
+        <Box
+          component="span"
+          class="on-item-color"
           sx={{
             bgcolor: props.item.color,
-            color: onColor(props.item.color),
+            borderRadius: 99,
             fontWeight: 700,
             maxWidth: '100%',
-            // 長いグループ名は省略せず折り返す (位置は withBreakHints + keep-all で制御)
-            height: 'auto',
+            px: { xs: 1, sm: 1.5 },
             py: 0.3,
-            '& .MuiChip-label': {
-              px: { xs: 0.5, sm: 1 },
-              whiteSpace: 'normal',
-              overflow: 'visible',
-              textAlign: 'center',
-              fontSize: { xs: '0.6rem', sm: '0.75rem' },
-              lineHeight: 1.3,
-              wordBreak: 'keep-all',
-              overflowWrap: 'anywhere',
-            },
+            textAlign: 'center',
+            fontSize: { xs: '0.6rem', sm: '0.75rem' },
+            lineHeight: 1.3,
+            // 長いグループ名は省略せず折り返す (位置は withBreakHints + keep-all で制御)
+            wordBreak: 'keep-all',
+            overflowWrap: 'anywhere',
           }}
-        />
+        >
+          {withBreakHints(props.item.group)}
+        </Box>
         <Typography
+          component="span"
+          class="balance-text"
           sx={{
+            display: 'block',
             fontSize: { xs: '1.05rem', sm: '2rem' },
             fontWeight: 800,
             color: inkColor(props.item.color),
@@ -89,8 +85,10 @@ function Card(props: { item: SortItem; onClick: () => void }) {
           {props.item.label}
         </Typography>
         <Typography
+          component="span"
           color="text.secondary"
           sx={{
+            display: 'block',
             fontSize: { xs: '0.7rem', sm: '0.875rem' },
             textAlign: 'center',
             overflowWrap: 'anywhere',
@@ -98,7 +96,7 @@ function Card(props: { item: SortItem; onClick: () => void }) {
         >
           {props.item.sub}
         </Typography>
-      </Paper>
+      </Box>
     </ButtonBase>
   );
 }
@@ -115,14 +113,20 @@ export default function SortScreen(props: Props) {
             {props.progress}%
           </Typography>
         </Stack>
-        <LinearProgress
-          variant="determinate"
+        {/* SUID の LinearProgress は値を支援技術に公開しないため、ネイティブ要素を使う */}
+        <progress
+          class="sort-progress"
+          max={100}
           value={props.progress}
-          sx={{ height: 10, borderRadius: 5 }}
+          aria-label="ソートの進捗"
         />
       </Box>
 
-      <Typography variant="h6" sx={{ textAlign: 'center', fontWeight: 800 }}>
+      <Typography
+        variant="h6"
+        component="h2"
+        sx={{ textAlign: 'center', fontWeight: 800 }}
+      >
         どちらが好き？
       </Typography>
 

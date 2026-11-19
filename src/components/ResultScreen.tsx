@@ -21,7 +21,7 @@ import {
   toRankedRows,
 } from '../lib/ranking';
 import type { Limit } from '../lib/ranking';
-import { borderColor, inkColor, onColor } from '../lib/color';
+import { borderColor, inkColor } from '../lib/color';
 import type { Run } from '../lib/sorter';
 import type { SortItem, SortMode } from '../types';
 
@@ -181,7 +181,7 @@ export default function ResultScreen(props: Props) {
       <div ref={el => (captureEl = el)}>
         <Paper variant="outlined" sx={{ p: { xs: 2, sm: 3 } }}>
           <Stack sx={{ mb: 2 }}>
-            <Typography variant="h6" sx={{ fontWeight: 800 }}>
+            <Typography variant="h6" component="h2" sx={{ fontWeight: 800 }}>
               {props.mode === 'char' ? 'キャラクター' : 'キャスト'}ランキング
             </Typography>
             <Typography variant="caption" color="text.secondary">
@@ -196,16 +196,24 @@ export default function ResultScreen(props: Props) {
             </Typography>
           </Stack>
 
-          <Stack spacing={1}>
+          {/* 順位表なので順序付きリストにする (list-style: none だと Safari がリストと認識しないため role を明示) */}
+          <Stack
+            component="ol"
+            role="list"
+            spacing={1}
+            sx={{ listStyle: 'none', m: 0, p: 0 }}
+          >
             <For each={visibleRows()}>
               {(row, i) => {
                 const item = () => props.items[row.index];
                 const showRank = () => isRankHead(visibleRows(), i());
                 return (
                   <Stack
+                    component="li"
                     direction="row"
                     alignItems="center"
                     spacing={2}
+                    style={{ '--item-color': item().color }}
                     sx={{
                       p: 1.2,
                       borderRadius: 3,
@@ -246,6 +254,7 @@ export default function ResultScreen(props: Props) {
                     </Box>
                     <Box
                       component="span"
+                      class="on-item-color"
                       sx={{
                         flexShrink: 0,
                         maxWidth: '40%',
@@ -253,7 +262,6 @@ export default function ResultScreen(props: Props) {
                         py: 0.25,
                         borderRadius: 99,
                         bgcolor: item().color,
-                        color: onColor(item().color),
                         fontSize: { xs: '0.65rem', sm: '0.75rem' },
                         fontWeight: 700,
                         ...ELLIPSIS,

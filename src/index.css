@@ -1,0 +1,75 @@
+/* アプリ全体で使う、SUID の sx では書きにくいスタイル */
+
+:root {
+  /* ライトテーマ専用なので、フォームやスクロールバーもライトで描画させる */
+  color-scheme: light;
+}
+
+/* 短い見出しは行の長さを揃えて折り返す */
+h1,
+h2,
+.balance-text {
+  text-wrap: balance;
+}
+
+/*
+ * キャラ色 (--item-color) の上に載せる文字色。
+ * contrast-color() 非対応ブラウザ向けに、相対色構文で WCAG の輝度しきい値から黒/白を選ぶ
+ */
+.on-item-color {
+  --wcag-y-threshold: 0.17913;
+  --y: max(0, sign(var(--wcag-y-threshold) - y));
+  color: color(
+    from var(--item-color) xyz-d65 calc(var(--y) * 0.9505) var(--y)
+      calc(var(--y) * 1.089)
+  );
+}
+
+@supports (color: contrast-color(red)) {
+  .on-item-color {
+    color: contrast-color(var(--item-color));
+  }
+}
+
+/* 比較カード: ButtonBase は既定でフォーカスが見えないため、キーボード操作時だけ枠を出す */
+.choice-card:focus-visible {
+  outline: 3px solid #e4407f;
+  outline-offset: 3px;
+}
+
+/* 開閉アイコンの回転は「動きを減らす」設定では行わない (状態は向きで表す) */
+@media (prefers-reduced-motion: no-preference) {
+  /* SvgIcon 自身の transition (fill) に負けないよう要素名で詳細度を上げ、fill も残す */
+  svg.expand-icon {
+    transition:
+      transform 0.2s,
+      fill 0.2s;
+  }
+}
+
+/* 比較画面の進捗バー (ネイティブ <progress> を全面的にカスタマイズ) */
+.sort-progress {
+  appearance: none;
+  border: 0 solid;
+  overflow: clip;
+  display: block;
+  inline-size: 100%;
+  block-size: 10px;
+  border-radius: 1e5px;
+  background: #f5c6d8;
+}
+
+.sort-progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+.sort-progress::-webkit-progress-value {
+  background: #e4407f;
+  border-radius: 1e5px;
+  transition: inline-size 0.3s;
+}
+
+.sort-progress::-moz-progress-bar {
+  background: #e4407f;
+  border-radius: 1e5px;
+}

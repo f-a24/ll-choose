@@ -1,12 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  borderColor,
-  darken,
-  inkColor,
-  isLight,
-  luminance,
-  onColor,
-} from './color';
+import { borderColor, darken, inkColor, isLight, luminance } from './color';
 
 describe('color', () => {
   it('相対輝度は黒で 0、白で 1', () => {
@@ -19,11 +12,9 @@ describe('color', () => {
     expect(darken('#123456', 0)).toBe('#123456');
   });
 
-  it('明るい色には濃い文字、暗い色には白文字を載せる', () => {
+  it('明るい色と暗い色を判定する', () => {
     expect(isLight('#FFE14D')).toBe(true);
-    expect(onColor('#FFE14D')).toBe('#222222');
     expect(isLight('#E8383D')).toBe(false);
-    expect(onColor('#E8383D')).toBe('#FFFFFF');
   });
 
   it('文字色は元の色より暗い', () => {

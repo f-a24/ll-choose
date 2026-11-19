@@ -29,15 +29,9 @@ export function darken(hex: string, amount: number): string {
   return toHex(parseHex(hex).map(v => v * (1 - amount)));
 }
 
-/** 明るい色か (白文字が読みにくい色か) */
+/** 明るい色か (そのまま文字色にすると淡い背景の上で読みにくい色か) */
 export function isLight(hex: string): boolean {
-  // 白文字のコントラストが 3:1 を下回るあたり (グレーや橙) から濃い文字に切り替える
   return luminance(hex) > 0.3;
-}
-
-/** その色で塗った面に載せる文字色 */
-export function onColor(hex: string): string {
-  return isLight(hex) ? '#222222' : '#FFFFFF';
 }
 
 /** 白〜淡い背景の上で読める、その色系統の濃い文字色 */

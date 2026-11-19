@@ -76,7 +76,11 @@ export default function SetupScreen(props: Props) {
   return (
     <Stack spacing={2.5} sx={{ pb: 12 }}>
       <Paper variant="outlined" sx={{ p: { xs: 1.5, sm: 2.5 } }}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1 }}>
+        <Typography
+          variant="subtitle1"
+          component="h2"
+          sx={{ fontWeight: 700, mb: 1 }}
+        >
           ソート対象
         </Typography>
         <ToggleButtonGroup
@@ -109,7 +113,11 @@ export default function SetupScreen(props: Props) {
           justifyContent="space-between"
           sx={{ mb: 1.5 }}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            sx={{ fontWeight: 700 }}
+          >
             対象メンバー
           </Typography>
           <Stack direction="row" spacing={1}>
@@ -177,10 +185,11 @@ export default function SetupScreen(props: Props) {
                       sx={{ p: 0 }}
                       onClick={() => toggleExpanded(group)}
                     >
+                      {/* 回転アニメーションは index.css で「動きを減らす」設定を考慮して付ける */}
                       <ExpandMoreIcon
+                        class="expand-icon"
                         sx={{
                           color: 'action.active',
-                          transition: 'transform .2s',
                           transform: isOpen() ? 'rotate(180deg)' : 'none',
                         }}
                       />
