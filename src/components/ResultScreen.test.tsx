@@ -69,6 +69,12 @@ const allGroupsChip = () =>
     .getAllByText('すべて')
     .find(el => el.className.includes('MuiChip-label'))!;
 
+/** グループ絞り込みのチップ (各行のグループバッジにも同名の文字があるため区別する) */
+const groupChip = (name: string) =>
+  screen
+    .getAllByText(name)
+    .find(el => el.className.includes('MuiChip-label'))!;
+
 describe('ResultScreen', () => {
   it('見出しに対象種別と件数を表示する', () => {
     setup();
@@ -98,7 +104,7 @@ describe('ResultScreen', () => {
 
   it('グループチップで絞り込み、順位は全体順位のまま表示する', () => {
     setup();
-    fireEvent.click(screen.getByText('グループB'));
+    fireEvent.click(groupChip('グループB'));
     expect(visibleLabels()).toEqual(['B1', 'B2']);
     expect(rankOf('B1')).toBe('2');
     expect(rankOf('B2')).toBe('4');
@@ -106,7 +112,7 @@ describe('ResultScreen', () => {
 
   it('絞り込みで同順位の 1 件目が消えた場合は「=」ではなく順位を表示する', () => {
     setup();
-    fireEvent.click(screen.getByText('グループA'));
+    fireEvent.click(groupChip('グループA'));
     // 2 位タイの B1 が消えるので、残った A2 に順位が出る
     expect(screen.queryByText('B1')).toBeNull();
     expect(rankOf('A2')).toBe('2');
@@ -114,7 +120,7 @@ describe('ResultScreen', () => {
 
   it('「すべて」を押すとグループの絞り込みを解除する', () => {
     setup();
-    fireEvent.click(screen.getByText('グループB'));
+    fireEvent.click(groupChip('グループB'));
     expect(visibleLabels()).toHaveLength(2);
     fireEvent.click(allGroupsChip());
     expect(visibleLabels()).toHaveLength(12);

@@ -10,6 +10,7 @@ import {
 } from '@suid/material';
 import HandshakeIcon from '@suid/icons-material/Handshake';
 import TuneIcon from '@suid/icons-material/Tune';
+import { borderColor, inkColor, onColor } from '../lib/color';
 import { withBreakHints } from '../lib/text';
 import type { Answer } from '../lib/sorter';
 import type { SortItem } from '../types';
@@ -31,18 +32,19 @@ function Card(props: { item: SortItem; onClick: () => void }) {
         // 狭い端末でも 2 枚が左右に並ぶよう等幅で縮める
         flex: '1 1 0',
         minWidth: 0,
-        borderRadius: 3,
+        borderRadius: 4,
         textAlign: 'left',
       }}
     >
       <Paper
-        elevation={3}
+        elevation={0}
         sx={{
           width: '100%',
           p: { xs: 1, sm: 4 },
-          borderRadius: 3,
-          borderTop: `8px solid ${props.item.color}`,
-          background: `linear-gradient(180deg, ${props.item.color}1a 0%, #fff 60%)`,
+          borderRadius: 4,
+          // 全面ソフトティント + 太い色枠 (ティントは白地に重ねて不透明にする)
+          border: `3px solid ${borderColor(props.item.color)}`,
+          background: `linear-gradient(${props.item.color}1f, ${props.item.color}1f), #fff`,
           minHeight: { xs: 170, sm: 200 },
           display: 'flex',
           flexDirection: 'column',
@@ -55,7 +57,8 @@ function Card(props: { item: SortItem; onClick: () => void }) {
           size="small"
           label={withBreakHints(props.item.group)}
           sx={{
-            bgcolor: `${props.item.color}33`,
+            bgcolor: props.item.color,
+            color: onColor(props.item.color),
             fontWeight: 700,
             maxWidth: '100%',
             // 長いグループ名は省略せず折り返す (位置は withBreakHints + keep-all で制御)
@@ -77,6 +80,7 @@ function Card(props: { item: SortItem; onClick: () => void }) {
           sx={{
             fontSize: { xs: '1.05rem', sm: '2rem' },
             fontWeight: 800,
+            color: inkColor(props.item.color),
             textAlign: 'center',
             lineHeight: 1.25,
             overflowWrap: 'anywhere',

@@ -21,6 +21,7 @@ import {
   toRankedRows,
 } from '../lib/ranking';
 import type { Limit } from '../lib/ranking';
+import { borderColor, inkColor, onColor } from '../lib/color';
 import type { Run } from '../lib/sorter';
 import type { SortItem, SortMode } from '../types';
 
@@ -207,9 +208,10 @@ export default function ResultScreen(props: Props) {
                     spacing={2}
                     sx={{
                       p: 1.2,
-                      borderRadius: 2,
-                      borderLeft: `8px solid ${item().color}`,
-                      bgcolor: `${item().color}14`,
+                      borderRadius: 3,
+                      // 比較画面のカードと同じ「ソフトティント + 色枠」 (ティントは白地に重ねて不透明にする)
+                      border: `2px solid ${borderColor(item().color)}`,
+                      background: `linear-gradient(${item().color}1f, ${item().color}1f), #fff`,
                     }}
                   >
                     <Box
@@ -225,7 +227,13 @@ export default function ResultScreen(props: Props) {
                       {showRank() ? row.rank : '='}
                     </Box>
                     <Box sx={{ flex: 1, minWidth: 0 }}>
-                      <Typography sx={{ fontWeight: 700, ...ELLIPSIS }}>
+                      <Typography
+                        sx={{
+                          fontWeight: 800,
+                          color: inkColor(item().color),
+                          ...ELLIPSIS,
+                        }}
+                      >
                         {item().label}
                       </Typography>
                       <Typography
@@ -233,8 +241,25 @@ export default function ResultScreen(props: Props) {
                         color="text.secondary"
                         sx={{ display: 'block', ...ELLIPSIS }}
                       >
-                        {item().sub} ・ {item().group}
+                        {item().sub}
                       </Typography>
+                    </Box>
+                    <Box
+                      component="span"
+                      sx={{
+                        flexShrink: 0,
+                        maxWidth: '40%',
+                        px: 1,
+                        py: 0.25,
+                        borderRadius: 99,
+                        bgcolor: item().color,
+                        color: onColor(item().color),
+                        fontSize: { xs: '0.65rem', sm: '0.75rem' },
+                        fontWeight: 700,
+                        ...ELLIPSIS,
+                      }}
+                    >
+                      {item().group}
                     </Box>
                   </Stack>
                 );
