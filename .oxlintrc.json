@@ -18,6 +18,9 @@
 
     "solid/jsx-no-duplicate-props": "error",
     "solid/jsx-no-undef": ["error", { "typescriptEnabled": true }],
+    "no-unassigned-vars": "off",
+    "solid/no-unassigned-vars": "error",
+    "solid/validate-jsx-nesting": "error",
     "solid/no-innerhtml": "error",
     "solid/jsx-no-script-url": "error",
     "solid/components-return-once": "warn",
