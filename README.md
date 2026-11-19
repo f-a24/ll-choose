@@ -18,7 +18,7 @@ npm run build    # 型チェック + dist/ に静的ファイルを出力
 npm run preview  # ビルド結果の確認
 npm run lint     # oxlint (lint:fix で自動修正)
 npm run format   # oxfmt で整形 (format:check で確認のみ)
-npm test         # Vitest (test:watch で監視実行)
+npm test         # Vitest + happy-dom (test:watch で監視実行)
 ```
 
 ## 機能
@@ -43,17 +43,3 @@ npm test         # Vitest (test:watch で監視実行)
   ]
 }
 ```
-
-### 既知の警告: Could not parse CSS stylesheet
-
-SUID の Chip が `--xxxxx: & .MuiChip-deleteIcon` という宣言を出力しており
-(`node_modules/@suid/material/Chip/Chip.jsx`)、jsdom が使う css-tree が
-カスタムプロパティの値として `&` を解釈できないため、Chip を描画するたびに
-「Could not parse CSS stylesheet」が出ていました。
-
-- ブラウザではカスタムプロパティの値はほぼ任意のトークン列が許されるため実害はありません。
-- jsdom の解析も tolerant で、この 1 宣言が無視されるだけでテスト結果にも影響しません。
-- ログが埋もれるため、`src/test/setup.ts` でこの宣言を含むスタイルシートのエラーだけ通知を止めています。
-  自分たちのスタイルの誤りは従来どおり報告されます。
-
-SUID 側の記述が修正されたら、このフィルタは削除して構いません。

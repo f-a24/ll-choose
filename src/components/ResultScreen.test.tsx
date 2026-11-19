@@ -5,7 +5,7 @@ import ResultScreen from './ResultScreen';
 import type { Run } from '../lib/sorter';
 import type { SortItem } from '../types';
 
-// 画像生成は jsdom では動かないため差し替える
+// 画像生成はテスト環境 (happy-dom) では動かないため差し替える
 vi.mock('html-to-image', () => ({ toPng: vi.fn() }));
 
 const GROUP_ORDER = ['グループA', 'グループB'];

@@ -9,7 +9,7 @@ export default defineConfig({
     conditions: ['development', 'browser'],
   },
   test: {
-    environment: 'jsdom',
+    environment: 'happy-dom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
