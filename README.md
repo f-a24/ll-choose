@@ -4,7 +4,8 @@
 
 ## 技術スタック
 
-- SolidJS 1.9 + TypeScript + Vite (最小構成)
+- SolidJS 1.9 + TypeScript 7 + Vite (最小構成)
+- oxlint (リンター) + oxfmt (フォーマッター)
 - SUID (Solid 向けの Material UI 移植版)
 - html-to-image (結果のPNG保存)
 
@@ -15,7 +16,8 @@ npm install
 npm run dev      # 開発サーバー
 npm run build    # 型チェック + dist/ に静的ファイルを出力
 npm run preview  # ビルド結果の確認
-npm run lint     # ESLint (--fix で自動修正)
+npm run lint     # oxlint (lint:fix で自動修正)
+npm run format   # oxfmt で整形 (format:check で確認のみ)
 npm test         # Vitest (test:watch で監視実行)
 ```
 
